@@ -199,9 +199,5 @@ data source的ip应该设置为`http://prometheus:9090`
 
 ## alert manager配置
 
-bot的webhook地址：
-
-```
-https://open.feishu.cn/open-apis/bot/v2/hook/4514b3a6-fa2a-4465-9a89-f8926e4fcc5f
-```
+用go语言简单写了个调用飞书webhook机器人的脚本，解析从alertmanager收到的告警消息，转化成larkReuqest格式发给飞书bot，实现prometheus系统对接飞书告警
 

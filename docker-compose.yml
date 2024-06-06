@@ -8,8 +8,9 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - ./prometheus/data:/prometheus
+      - "./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"
+      - "./prometheus/data:/prometheus"
+      - "./alertmanager/alert.yml:/etc/prometheus/rules/alert.yml"
     command: 
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
@@ -21,7 +22,7 @@ services:
 
   grafana:
     image: grafana/grafana
-    container_name: "grafana0"
+    container_name: "grafana"
     ports:
       - "9000:3000"
     restart: always
@@ -37,3 +38,12 @@ services:
       - '9093:9093'
     volumes:
       - './alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml'
+      - './alertmanager/template/webhook.tmpl:/etc/alertmanager/template/webhook.tmpl'
+
+  prometheus-alert:
+    image: webhook:v2
+    container_name: prometheus-alert
+    hostname: prometheus-alert
+    restart: always
+    ports:
+      - "9094:9094"

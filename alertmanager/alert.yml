@@ -1,0 +1,23 @@
+groups:
+  - name: cAdvisor-alert
+    rules:
+      - alert: memory-usage-alert
+        expr: container_memory_usage_bytes / machine_memory_bytes * 100 > 95
+        for: 3m
+        labels:
+          severity: 'critical'
+        annotations:
+          summary: "instance: {{ $labels.instance }} 内存使用率异常"
+          description: "instance: {{ $labels.instance }} \n- job: {{ $labels.job }} 内存使用率持续3分钟高过95%"
+          value: "{{ $value }}"
+          instance: "{{ $labels.instance }}"
+      - alert: node-down-alert
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: 'critical'
+        annotations:
+          summary: "instance: {{ $labels.instance }} 宕机"
+          description: "instance: {{ $labels.instance }} \n- job: {{ $labels.job }} 宕机时间超过1分钟"
+          value: "{{ $value }}"
+          instance: "{{ $labels.instance }}"

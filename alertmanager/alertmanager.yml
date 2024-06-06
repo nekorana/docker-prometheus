@@ -7,10 +7,11 @@ route:
   group_interval: 30s
   repeat_interval: 1m
   receiver: 'web.hook'
+
 receivers:
   - name: 'web.hook'
     webhook_configs:
-      - url: ''
+      - url: 'http://host.docker.internal:9094/webhook'
 
 inhibit_rules:
   - source_match:

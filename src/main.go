@@ -10,7 +10,9 @@ import (
 	"net/http"
 )
 
-const LarkUrl = "https://open.feishu.cn/open-apis/bot/v2/hook/4514b3a6-fa2a-4465-9a89-f8926e4fcc5f"
+const (
+	LarkUrl = "https://open.feishu.cn/open-apis/bot/v2/hook/4514b3a6-fa2a-4465-9a89-f8926e4fcc5f"
+)
 
 func AlertmanagerWebHook(c *gin.Context) {
 	var notification model.Notification
@@ -18,7 +20,7 @@ func AlertmanagerWebHook(c *gin.Context) {
 	err := c.ShouldBindJSON(&notification)
 	if err != nil {
 		c.JSON(500, gin.H{
-			"code": 500,
+			"code":    500,
 			"message": err.Error(),
 		})
 
@@ -33,7 +35,7 @@ func AlertmanagerWebHook(c *gin.Context) {
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
 		c.JSON(500, gin.H{
-			"code": 500,
+			"code":  500,
 			"error": err.Error(),
 		})
 
@@ -50,7 +52,7 @@ func AlertmanagerWebHook(c *gin.Context) {
 	err = json.Unmarshal(body, &larkResponse)
 	if err != nil {
 		c.JSON(500, gin.H{
-			"code": 500,
+			"code":  500,
 			"error": err.Error(),
 		})
 
@@ -58,7 +60,7 @@ func AlertmanagerWebHook(c *gin.Context) {
 	}
 
 	c.JSON(200, gin.H{
-		"code": 200,
+		"code":    200,
 		"message": "successful receive alert notification message!",
 	})
 }
@@ -66,5 +68,5 @@ func AlertmanagerWebHook(c *gin.Context) {
 func main() {
 	r := gin.Default()
 	r.POST("/webhook", AlertmanagerWebHook)
-	_ = r.Run(":8080")
+	_ = r.Run(":9094")
 }

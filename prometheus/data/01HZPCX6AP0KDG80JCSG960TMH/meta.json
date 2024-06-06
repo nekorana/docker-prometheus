@@ -1,0 +1,17 @@
+{
+	"ulid": "01HZPCX6AP0KDG80JCSG960TMH",
+	"minTime": 1717654113012,
+	"maxTime": 1717660800000,
+	"stats": {
+		"numSamples": 6449197,
+		"numSeries": 11540,
+		"numChunks": 56400
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01HZPCX6AP0KDG80JCSG960TMH"
+		]
+	},
+	"version": 1
+}
