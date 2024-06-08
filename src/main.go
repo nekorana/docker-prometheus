@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	LarkUrl = "https://open.feishu.cn/open-apis/bot/v2/hook/4514b3a6-fa2a-4465-9a89-f8926e4fcc5f"
+	LarkUrl = "https://open.feishu.cn/open-apis/bot/v2/hook/82c5cf22-47da-46a2-aa96-4af6c700d549"
 )
 
 func AlertmanagerWebHook(c *gin.Context) {
