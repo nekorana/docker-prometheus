@@ -41,6 +41,7 @@ services:
       - './alertmanager/template/webhook.tmpl:/etc/alertmanager/template/webhook.tmpl'
 
   prometheus-alert:
+    build: .
     image: webhook:v2
     container_name: prometheus-alert
     hostname: prometheus-alert
